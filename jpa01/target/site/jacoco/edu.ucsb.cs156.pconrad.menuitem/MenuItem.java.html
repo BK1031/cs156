@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MenuItem.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">menuitem</a> &gt; <a href="index.source.html" class="el_package">edu.ucsb.cs156.pconrad.menuitem</a> &gt; <span class="el_source">MenuItem.java</span></div><h1>MenuItem.java</h1><pre class="source lang-java linenums">package edu.ucsb.cs156.pconrad.menuitem;
+
+public class MenuItem {
+
+    private String name;
+    private int priceInCents;
+    private String category;
+
+    /**
+     * Custom exception thrown when getPrice is called with a width
+     * that is too narrow for the formatted price.
+     */
+
+<span class="fc" id="L14">    public static class TooNarrowException extends RuntimeException {</span>
+    }
+
+
+<span class="fc" id="L18">    public MenuItem(String name, int priceInCents, String category) {</span>
+<span class="fc" id="L19">        this.name = name;</span>
+<span class="fc" id="L20">        this.priceInCents = priceInCents;</span>
+<span class="fc" id="L21">        this.category = category;</span>
+<span class="fc" id="L22">    }</span>
+
+    /**
+     * Returns the price, formatted as a string with a $.
+     * For example &quot;$0.99&quot;, &quot;$10.99&quot;, or &quot;$3.50&quot;
+     */
+
+    public String getPrice() {
+<span class="fc" id="L30">        return &quot;$&quot; + this.priceInCents / 100 + &quot;.&quot; + this.priceInCents % 100;</span>
+    }
+
+    /**
+     * Returns the price, formatted as a string with a $,
+     * right justified in a field with the specified width.
+     * For example &quot;$0.99&quot;, &quot;$10.99&quot;, or &quot;$3.50&quot;.
+     * &lt;p&gt;
+     * If the width is too small, throws TooNarrowException
+     *
+     * @param width width of returned string
+     */
+
+    public String getPrice(int width) {
+<span class="fc" id="L44">        String price = this.getPrice();</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        if (price.length() &gt; width) {</span>
+<span class="fc" id="L46">            throw new TooNarrowException();</span>
+        }
+<span class="fc" id="L48">        return String.format(&quot;%&quot; + width + &quot;s&quot;, price);</span>
+    }
+
+    public String getName() {
+<span class="fc" id="L52">        return this.name;</span>
+    }
+
+    public String getCategory() {
+<span class="fc" id="L56">        return this.category;</span>
+    }
+
+    public int getPriceInCents() {
+<span class="fc" id="L60">        return this.priceInCents;</span>
+    }
+
+    /**
+     * return a string in csv format, in the order name,price,cateogry.
+     * For example &lt;code&gt;Small Poke Bowl,1049,Poke Bowls&lt;/code&gt;
+     *
+     * @return string in csv format
+     */
+
+    @Override
+    public String toString() {
+<span class="fc" id="L72">        return this.name + &quot;,&quot; + this.priceInCents + &quot;,&quot; + this.category;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
